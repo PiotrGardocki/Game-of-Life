@@ -1,6 +1,6 @@
-#include "catch2/catch.hpp"
-#include "Model/CellsReader.hpp"
-#include "Model/DynamicCellsGrid.hpp"
+#include <catch2/catch.hpp>
+#include <Model/CellsReader.hpp>
+#include <Model/DynamicCellsGrid.hpp>
 
 TEST_CASE("CellsReader properly communicates with CellsGrid", "[Model][CellsReader]")
 {
