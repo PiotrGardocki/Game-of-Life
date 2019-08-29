@@ -36,4 +36,5 @@
 *.sln
 *.vcxproj*
 Debug/*
-*/Debug/*
+**/Debug/*
+bin/*
