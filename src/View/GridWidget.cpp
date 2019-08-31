@@ -15,6 +15,7 @@ void GridWidget::updateOneStep()
 {
 	CellsUpdater updater(&grid);
 	updater.updateOneStep();
+	repaint();
 }
 
 void GridWidget::paintEvent(QPaintEvent* event)
