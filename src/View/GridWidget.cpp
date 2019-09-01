@@ -6,8 +6,11 @@
 #include <QPainter>
 #include <QPaintEvent>
 
+std::vector<GridWidget::ZoomOption> GridWidget::zoomOptions = { {1,0}, {2,0}, {4,0}, {6,1}, {7,1} };
+
 GridWidget::GridWidget(CellsGrid& grid)
 	: grid(grid)
+	, currentZoomOption(3)
 {
 }
 
@@ -18,14 +21,45 @@ void GridWidget::updateOneStep()
 	repaint();
 }
 
+void GridWidget::zoomIn()
+{
+	if (currentZoomOption < zoomOptions.size() - 1)
+	{
+		++currentZoomOption;
+		repaint();
+	}
+}
+
+void GridWidget::zoomOut()
+{
+	if (currentZoomOption > 0)
+	{
+		--currentZoomOption;
+		repaint();
+	}
+}
+
 void GridWidget::paintEvent(QPaintEvent* event)
 {
 	CellsReader reader(&grid);
 
 	QPainter painter(this);
-	painter.setPen(Qt::gray);
 
-	QSize cellSize(7, 7);
+	auto border = getBorderSize();
+	auto cell = getCellSize();
+
+	QPen pen;
+	if (border)
+	{
+		pen.setWidth(border);
+		pen.setColor(Qt::gray);
+	}
+	else
+		pen.setStyle(Qt::PenStyle::NoPen);
+
+	painter.setPen(pen);
+
+	QSize cellSize(cell + border, cell + border);
 	QPoint startPoint = event->rect().topLeft();
 
 	for (size_t column = 0; column < grid.getColumnsNum(); ++column)
@@ -43,4 +77,14 @@ void GridWidget::paintEvent(QPaintEvent* event)
 			painter.drawRect(cellRect);
 		}
 	}
+}
+
+int GridWidget::getCellSize() const
+{
+	return zoomOptions.at(currentZoomOption).cellSize;
+}
+
+int GridWidget::getBorderSize() const
+{
+	return zoomOptions.at(currentZoomOption).borderSize;
 }
