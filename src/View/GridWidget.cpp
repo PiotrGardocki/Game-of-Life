@@ -79,6 +79,19 @@ void GridWidget::paintEvent(QPaintEvent* event)
 	}
 }
 
+void GridWidget::mousePressEvent(QMouseEvent* event)
+{
+	auto position = event->pos();
+	auto cellWidth = getCellSize() + getBorderSize();
+
+	size_t column = position.x() / cellWidth;
+	size_t row = position.y() / cellWidth;
+
+	grid.flipCell(column, row);
+
+	repaint();
+}
+
 int GridWidget::getCellSize() const
 {
 	return zoomOptions.at(currentZoomOption).cellSize;

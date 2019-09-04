@@ -11,6 +11,7 @@ public:
 	virtual void setCell(int column, int row, bool alive) = 0;
 	virtual void turnCellOn(int column, int row) = 0;
 	virtual void turnCellOff(int column, int row) = 0;
+	virtual void flipCell(int column, int row) = 0;
 
 	virtual size_t getColumnsNum() const = 0;
 	virtual size_t getRowsNum() const = 0;

@@ -25,6 +25,7 @@ public slots:
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
+	void mousePressEvent(QMouseEvent* event) override;
 
 private:
 	int getCellSize() const;

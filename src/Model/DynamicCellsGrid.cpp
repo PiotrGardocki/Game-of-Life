@@ -49,6 +49,12 @@ void DynamicCellsGrid::turnCellOff(int column, int row)
 	setCell(column, row, false);
 }
 
+void DynamicCellsGrid::flipCell(int column, int row)
+{
+	auto& cell = getCell(column, row);
+	cell.flip();
+}
+
 size_t DynamicCellsGrid::getColumnsNum() const
 {
 	return cells.size();

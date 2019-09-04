@@ -14,6 +14,7 @@ public:
 	void setCell(int column, int row, bool alive) override;
 	void turnCellOn(int column, int row) override;
 	void turnCellOff(int column, int row) override;
+	void flipCell(int column, int row) override;
 
 	size_t getColumnsNum() const override;
 	size_t getRowsNum() const override;
