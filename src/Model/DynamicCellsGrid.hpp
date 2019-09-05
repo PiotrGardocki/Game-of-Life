@@ -8,8 +8,8 @@ public:
 	DynamicCellsGrid() = default;
 	DynamicCellsGrid(size_t columns, size_t rows);
 
-	std::vector<bool>::reference getCell(size_t column, size_t row) override;
-	std::vector<bool>::const_reference getCell(size_t column, size_t row) const override;
+	std::vector<bool>::reference getCell(int column, int row) override;
+	std::vector<bool>::const_reference getCell(int column, int row) const override;
 
 	void setCell(int column, int row, bool alive) override;
 	void turnCellOn(int column, int row) override;
@@ -20,6 +20,8 @@ public:
 	size_t getRowsNum() const override;
 
 private:
+	void adaptGridSize(int column, int row);
+
 	void appendRowsAtTop(size_t num);
 	void appendRowsAtBottom(size_t num);
 	void appendColumnsAtLeft(size_t num);

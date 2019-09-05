@@ -5,38 +5,27 @@ DynamicCellsGrid::DynamicCellsGrid(size_t columns, size_t rows)
 {
 }
 
-std::vector<bool>::reference DynamicCellsGrid::getCell(size_t column, size_t row)
+std::vector<bool>::reference DynamicCellsGrid::getCell(int column, int row)
 {
+	adaptGridSize(column, row);
+	
+	if (column < 0)
+		column = 0;
+	if (row < 0)
+		row = 0;
+
 	return cells.at(column).at(row);
 }
 
-std::vector<bool>::const_reference DynamicCellsGrid::getCell(size_t column, size_t row) const
+std::vector<bool>::const_reference DynamicCellsGrid::getCell(int column, int row) const
 {
 	return cells.at(column).at(row);
 }
 
 void DynamicCellsGrid::setCell(int column, int row, bool alive)
 {
-	auto columnsNum = static_cast<int>(getColumnsNum());
-	auto rowsNum = static_cast<int>(getRowsNum());
-
-	if (column < columnsNum && column >= 0 && row < rowsNum && row >= 0)
-	{
-		getCell(column, row) = alive;
-	}
-	else if (alive)
-	{
-		if (column < 0)
-			appendColumnsAtLeft(-column);
-		if (row < 0)
-			appendRowsAtTop(-row);
-		if (column >= columnsNum)
-			appendColumnsAtRight(column - columnsNum + 1);
-		if (row >= rowsNum)
-			appendRowsAtBottom(row - rowsNum + 1);
-
-		getCell(column, row) = alive;
-	}
+	auto& cell = getCell(column, row);
+	cell = alive;
 }
 
 void DynamicCellsGrid::turnCellOn(int column, int row)
@@ -63,6 +52,22 @@ size_t DynamicCellsGrid::getColumnsNum() const
 size_t DynamicCellsGrid::getRowsNum() const
 {
 	return cells.size() ? cells.at(0).size() : 0;
+}
+
+void DynamicCellsGrid::adaptGridSize(int column, int row)
+{
+	auto columnsNum = static_cast<int>(getColumnsNum());
+	auto rowsNum = static_cast<int>(getRowsNum());
+
+	if (column < 0)
+		appendColumnsAtLeft(-column);
+	else if (column >= columnsNum)
+		appendColumnsAtRight(column - columnsNum + 1);
+	
+	if (row < 0)
+		appendRowsAtTop(-row);
+	else if (row >= rowsNum)
+		appendRowsAtBottom(row - rowsNum + 1);
 }
 
 void DynamicCellsGrid::appendRowsAtTop(size_t num)
