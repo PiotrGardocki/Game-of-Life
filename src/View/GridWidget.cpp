@@ -81,13 +81,24 @@ void GridWidget::paintEvent(QPaintEvent* event)
 
 void GridWidget::mousePressEvent(QMouseEvent* event)
 {
+	mousePressed = true;
+}
+
+void GridWidget::mouseReleaseEvent(QMouseEvent* event)
+{
+	mousePressed = false;
+}
+
+void GridWidget::mouseMoveEvent(QMouseEvent* event)
+{
 	auto position = event->pos();
 	auto cellWidth = getCellSize() + getBorderSize();
 
 	size_t column = position.x() / cellWidth;
 	size_t row = position.y() / cellWidth;
 
-	grid.flipCell(column, row);
+	//grid.flipCell(column, row);
+	grid.turnCellOn(column, row);
 
 	repaint();
 }

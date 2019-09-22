@@ -26,6 +26,8 @@ public slots:
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
+	void mouseReleaseEvent(QMouseEvent* event) override;
+	void mouseMoveEvent(QMouseEvent* event) override;
 
 private:
 	int getCellSize() const;
@@ -34,6 +36,8 @@ private:
 private:
 	CellsGrid& grid;
 	size_t currentZoomOption;
+
+	bool mousePressed = false;
 
 	static std::vector<ZoomOption> zoomOptions;
 };
