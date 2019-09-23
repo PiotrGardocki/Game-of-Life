@@ -82,6 +82,7 @@ void GridWidget::paintEvent(QPaintEvent* event)
 void GridWidget::mousePressEvent(QMouseEvent* event)
 {
 	mousePressed = true;
+	handleCellInput(event);
 }
 
 void GridWidget::mouseReleaseEvent(QMouseEvent* event)
@@ -90,6 +91,11 @@ void GridWidget::mouseReleaseEvent(QMouseEvent* event)
 }
 
 void GridWidget::mouseMoveEvent(QMouseEvent* event)
+{
+	handleCellInput(event);
+}
+
+void GridWidget::handleCellInput(QMouseEvent* event)
 {
 	auto position = event->pos();
 	auto cellWidth = getCellSize() + getBorderSize();

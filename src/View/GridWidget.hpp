@@ -30,6 +30,8 @@ protected:
 	void mouseMoveEvent(QMouseEvent* event) override;
 
 private:
+	void handleCellInput(QMouseEvent* event);
+
 	int getCellSize() const;
 	int getBorderSize() const;
 
