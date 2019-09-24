@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 	centralWidget->setLayout(layout);
 
 	GridWidget* gridWidget = new GridWidget(grid);
-	layout->addWidget(gridWidget);
+	layout->addWidget(gridWidget, 1);
 
 	QWidget* buttons = new QWidget(this);
 	layout->addWidget(buttons);
