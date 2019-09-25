@@ -11,7 +11,9 @@ std::vector<GridWidget::ZoomOption> GridWidget::zoomOptions = { {1,0}, {2,0}, {4
 GridWidget::GridWidget(CellsGrid& grid)
 	: grid(grid)
 	, currentZoomOption(3)
+	, timer(new QTimer(this))
 {
+	connect(timer, &QTimer::timeout, this, &GridWidget::updateOneStep);
 }
 
 void GridWidget::updateOneStep()
@@ -19,6 +21,16 @@ void GridWidget::updateOneStep()
 	CellsUpdater updater(&grid);
 	updater.updateOneStep();
 	repaint();
+}
+
+void GridWidget::startClock()
+{
+	timer->start(1000);
+}
+
+void GridWidget::stopClock()
+{
+	timer->stop();
 }
 
 void GridWidget::zoomIn()

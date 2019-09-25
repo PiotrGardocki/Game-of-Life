@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
+#include <QtCore/QTimer>
 
 #include <Model/CellsGrid.hpp>
 
@@ -20,6 +21,9 @@ public:
 public slots:
 	void updateOneStep();
 
+	void startClock();
+	void stopClock();
+
 	void zoomIn();
 	void zoomOut();
 
@@ -36,6 +40,7 @@ private:
 	int getBorderSize() const;
 
 private:
+	QTimer* timer;
 	CellsGrid& grid;
 	size_t currentZoomOption;
 

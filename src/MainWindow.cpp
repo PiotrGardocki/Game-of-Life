@@ -30,8 +30,14 @@ MainWindow::MainWindow(QWidget *parent)
 	buttonsLayout->addWidget(zoomIn);
 	QPushButton* zoomOut = new QPushButton("-");
 	buttonsLayout->addWidget(zoomOut);
+	QPushButton* clockStart = new QPushButton("Start Clock");
+	buttonsLayout->addWidget(clockStart);
+	QPushButton* clockStop = new QPushButton("Stop Clock");
+	buttonsLayout->addWidget(clockStop);
 
 	connect(button, &QPushButton::clicked, gridWidget, &GridWidget::updateOneStep);
 	connect(zoomIn, &QPushButton::clicked, gridWidget, &GridWidget::zoomIn);
 	connect(zoomOut, &QPushButton::clicked, gridWidget, &GridWidget::zoomOut);
+	connect(clockStart, &QPushButton::clicked, gridWidget, &GridWidget::startClock);
+	connect(clockStop, &QPushButton::clicked, gridWidget, &GridWidget::stopClock);
 }
