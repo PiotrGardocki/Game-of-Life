@@ -7,6 +7,7 @@
 #include <QPaintEvent>
 
 std::vector<GridWidget::ZoomOption> GridWidget::zoomOptions = { {1,0}, {2,0}, {4,0}, {6,1}, {7,1} };
+std::vector<int> GridWidget::intervalOptions = { 1000, 500, 250, 125, 60 };
 
 GridWidget::GridWidget(CellsGrid& grid)
 	: grid(grid)
@@ -25,12 +26,32 @@ void GridWidget::updateOneStep()
 
 void GridWidget::startClock()
 {
-	timer->start(1000);
+	timer->start(intervalOptions.at(currentIntervalIndex));
 }
 
 void GridWidget::stopClock()
 {
 	timer->stop();
+}
+
+void GridWidget::speedUp()
+{
+	if (currentIntervalIndex < intervalOptions.size() - 1)
+	{
+		++currentIntervalIndex;
+		if (timer->isActive())
+			timer->start(intervalOptions.at(currentIntervalIndex));
+	}
+}
+
+void GridWidget::slowDown()
+{
+	if (currentIntervalIndex > 0)
+	{
+		--currentIntervalIndex;
+		if (timer->isActive())
+			timer->start(intervalOptions.at(currentIntervalIndex));
+	}
 }
 
 void GridWidget::zoomIn()

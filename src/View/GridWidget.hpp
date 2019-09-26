@@ -24,6 +24,9 @@ public slots:
 	void startClock();
 	void stopClock();
 
+	void speedUp();
+	void slowDown();
+
 	void zoomIn();
 	void zoomOut();
 
@@ -43,8 +46,10 @@ private:
 	QTimer* timer;
 	CellsGrid& grid;
 	size_t currentZoomOption;
+	size_t currentIntervalIndex = 0;
 
 	bool mousePressed = false;
 
 	static std::vector<ZoomOption> zoomOptions;
+	static std::vector<int> intervalOptions;
 };

@@ -34,10 +34,16 @@ MainWindow::MainWindow(QWidget *parent)
 	buttonsLayout->addWidget(clockStart);
 	QPushButton* clockStop = new QPushButton("Stop Clock");
 	buttonsLayout->addWidget(clockStop);
+	QPushButton* speedUp = new QPushButton("Speed Up");
+	buttonsLayout->addWidget(speedUp);
+	QPushButton* slowDown = new QPushButton("Slow Down");
+	buttonsLayout->addWidget(slowDown);
 
 	connect(button, &QPushButton::clicked, gridWidget, &GridWidget::updateOneStep);
 	connect(zoomIn, &QPushButton::clicked, gridWidget, &GridWidget::zoomIn);
 	connect(zoomOut, &QPushButton::clicked, gridWidget, &GridWidget::zoomOut);
 	connect(clockStart, &QPushButton::clicked, gridWidget, &GridWidget::startClock);
 	connect(clockStop, &QPushButton::clicked, gridWidget, &GridWidget::stopClock);
+	connect(speedUp, &QPushButton::clicked, gridWidget, &GridWidget::speedUp);
+	connect(slowDown, &QPushButton::clicked, gridWidget, &GridWidget::slowDown);
 }
