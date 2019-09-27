@@ -40,7 +40,7 @@ void GridWidget::speedUp()
 	{
 		++currentIntervalIndex;
 		if (timer->isActive())
-			timer->start(intervalOptions.at(currentIntervalIndex));
+			startClock();
 	}
 }
 
@@ -50,7 +50,7 @@ void GridWidget::slowDown()
 	{
 		--currentIntervalIndex;
 		if (timer->isActive())
-			timer->start(intervalOptions.at(currentIntervalIndex));
+			startClock();
 	}
 }
 
