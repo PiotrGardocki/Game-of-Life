@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 	, grid(7, 5)
 {
+	setMinimumHeight(200);
+
 	QWidget* centralWidget = new QWidget(this);
 	setCentralWidget(centralWidget);
 
@@ -24,20 +26,26 @@ MainWindow::MainWindow(QWidget *parent)
 	QHBoxLayout* buttonsLayout = new QHBoxLayout;
 	buttons->setLayout(buttonsLayout);
 
+	QWidget* buttons2 = new QWidget(this);
+	layout->addWidget(buttons2);
+	QHBoxLayout* buttonsLayout2 = new QHBoxLayout;
+	buttons2->setLayout(buttonsLayout2);
+
 	QPushButton* button = new QPushButton("Update");
 	buttonsLayout->addWidget(button);
 	QPushButton* zoomIn = new QPushButton("+");
 	buttonsLayout->addWidget(zoomIn);
 	QPushButton* zoomOut = new QPushButton("-");
 	buttonsLayout->addWidget(zoomOut);
+
 	QPushButton* clockStart = new QPushButton("Start Clock");
-	buttonsLayout->addWidget(clockStart);
+	buttonsLayout2->addWidget(clockStart);
 	QPushButton* clockStop = new QPushButton("Stop Clock");
-	buttonsLayout->addWidget(clockStop);
+	buttonsLayout2->addWidget(clockStop);
 	QPushButton* speedUp = new QPushButton("Speed Up");
-	buttonsLayout->addWidget(speedUp);
+	buttonsLayout2->addWidget(speedUp);
 	QPushButton* slowDown = new QPushButton("Slow Down");
-	buttonsLayout->addWidget(slowDown);
+	buttonsLayout2->addWidget(slowDown);
 
 	connect(button, &QPushButton::clicked, gridWidget, &GridWidget::updateOneStep);
 	connect(zoomIn, &QPushButton::clicked, gridWidget, &GridWidget::zoomIn);
