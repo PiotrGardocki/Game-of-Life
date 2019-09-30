@@ -81,6 +81,10 @@ void GridWidget::paintEvent(QPaintEvent* event)
 	auto border = getBorderSize();
 	auto cell = getCellSize();
 
+	auto rect = event->rect();
+	auto maxColumns = rect.width() / (border + cell);
+	auto maxRows = rect.height() / (border + cell);
+
 	QPen pen;
 	if (border)
 	{
@@ -105,6 +109,35 @@ void GridWidget::paintEvent(QPaintEvent* event)
 			else
 				painter.setBrush({ Qt::black });
 
+			QPoint cellPoint = startPoint + QPoint(column * (cellSize.width()), row * (cellSize.height()));
+			QRect cellRect(cellPoint, cellSize);
+			painter.drawRect(cellRect);
+		}
+	}
+
+	painter.setBrush({ Qt::black });
+	for (size_t column = 0; column < grid.getColumnsNum(); ++column)
+	{
+		for (auto row = grid.getRowsNum(); row < maxRows; ++row)
+		{
+			QPoint cellPoint = startPoint + QPoint(column * (cellSize.width()), row * (cellSize.height()));
+			QRect cellRect(cellPoint, cellSize);
+			painter.drawRect(cellRect);
+		}
+	}
+	for (auto column = grid.getColumnsNum(); column < maxColumns; ++column)
+	{
+		for (size_t row = 0; row < grid.getRowsNum(); ++row)
+		{
+			QPoint cellPoint = startPoint + QPoint(column * (cellSize.width()), row * (cellSize.height()));
+			QRect cellRect(cellPoint, cellSize);
+			painter.drawRect(cellRect);
+		}
+	}
+	for (auto column = grid.getColumnsNum(); column < maxColumns; ++column)
+	{
+		for (auto row = grid.getRowsNum(); row < maxRows; ++row)
+		{
 			QPoint cellPoint = startPoint + QPoint(column * (cellSize.width()), row * (cellSize.height()));
 			QRect cellRect(cellPoint, cellSize);
 			painter.drawRect(cellRect);
