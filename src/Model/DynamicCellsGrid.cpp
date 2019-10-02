@@ -24,7 +24,7 @@ std::vector<bool>::const_reference DynamicCellsGrid::getCell(int column, int row
 
 void DynamicCellsGrid::setCell(int column, int row, bool alive)
 {
-	auto& cell = getCell(column, row);
+	auto cell = getCell(column, row);
 	cell = alive;
 }
 
@@ -40,7 +40,7 @@ void DynamicCellsGrid::turnCellOff(int column, int row)
 
 void DynamicCellsGrid::flipCell(int column, int row)
 {
-	auto& cell = getCell(column, row);
+	auto cell = getCell(column, row);
 	cell.flip();
 }
 
