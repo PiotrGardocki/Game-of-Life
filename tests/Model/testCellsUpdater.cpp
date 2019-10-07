@@ -4,13 +4,15 @@
 
 #include <fstream>
 
+#include <iostream>
+
 namespace
 {
 	void readGrid(std::ifstream& file, CellsGrid& grid)
 	{
-		for (size_t column = 0; column < grid.getColumnsNum(); ++column)
+		for (size_t row = 0; row < grid.getRowsNum(); ++row)
 		{
-			for (size_t row = 0; row < grid.getRowsNum(); ++row)
+			for (size_t column = 0; column < grid.getColumnsNum(); ++column)
 			{
 				short alive;
 				file >> alive;
