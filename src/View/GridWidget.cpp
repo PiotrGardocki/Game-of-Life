@@ -7,7 +7,7 @@
 #include <QPaintEvent>
 
 std::vector<GridWidget::ZoomOption> GridWidget::zoomOptions = { {1,0}, {2,0}, {4,0}, {6,1}, {7,1} };
-std::vector<int> GridWidget::intervalOptions = { 1000, 500, 250, 125, 60, 30 };
+std::vector<int> GridWidget::intervalOptions = { 1000, 500, 250, 125, 60, 30, 15 };
 
 GridWidget::GridWidget(CellsGrid& grid)
 	: grid(grid)
