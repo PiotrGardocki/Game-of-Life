@@ -14,7 +14,7 @@ GridWidget::GridWidget(CellsGrid& grid)
 	, currentZoomOption(3)
 	, timer(new QTimer(this))
 {
-	connect(timer, &QTimer::timeout, this, &GridWidget::updateOneStep);
+	auto connection = connect(timer, &QTimer::timeout, this, &GridWidget::updateOneStep);
 }
 
 void GridWidget::updateOneStep()
